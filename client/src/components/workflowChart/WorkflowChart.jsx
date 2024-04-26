@@ -47,7 +47,7 @@ const WorkflowChart = () => {
       });
       const newNode = {
         id: type + " " + getId(),
-        type:type,
+        // type:type,
         position,
         data: { label: `${type}` },
       };

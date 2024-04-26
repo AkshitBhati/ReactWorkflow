@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDB from "./connectDB.js";
 import userRoutes from "./routes/user.routes.js";
+import workflowRoutes from "./routes/workflow.routes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", userRoutes);
+app.use(workflowRoutes);
 
 // Error handling middleware 
 app.use((err, req, res, next) => {
