@@ -8,13 +8,10 @@ import ReactFlow, {
   Background,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-
-// import Sidebar from './Sidebar';
-
 import './WorkflowChart.css';
 
 let id = 0;
-const getId = () => `dndnode_${id++}`;
+const getId = () => `${id++}`;
 
 const WorkflowChart = () => {
   const reactFlowWrapper = useRef(null);
@@ -26,7 +23,7 @@ const WorkflowChart = () => {
     (params) => setEdges((eds) => addEdge(params, eds)),
     [],
   );
-
+  console.log(edges)
   const onDragOver = useCallback((event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
@@ -49,8 +46,8 @@ const WorkflowChart = () => {
         y: event.clientY,
       });
       const newNode = {
-        id: getId(),
-        type,
+        id: type + " " + getId(),
+        type:type,
         position,
         data: { label: `${type}` },
       };
@@ -59,7 +56,8 @@ const WorkflowChart = () => {
     },
     [reactFlowInstance],
   );
-
+  console.log(nodes)
+  
   return (
     <div className="dndflow">
       <ReactFlowProvider>
@@ -73,13 +71,12 @@ const WorkflowChart = () => {
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
-            fitView
+            
           >
             <Controls />
             <Background />
           </ReactFlow>
         </div>
-        {/* <Sidebar /> */}
       </ReactFlowProvider>
     </div>
   );
