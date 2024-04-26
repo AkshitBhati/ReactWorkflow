@@ -1,0 +1,16 @@
+.workflow-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.workflow-node{
+    width: 30%;
+
+}
+
+.workflow-chart{
+    height: 85vh;
+    width: 65%;
+    border: 1px solid #000;
+}

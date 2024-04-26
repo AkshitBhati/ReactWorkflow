@@ -1,0 +1,8 @@
+.nodes-container{
+    border: 1px solid #000;
+    font-family: Poppins;
+}
+
+.nodes-container h1{
+    font-weight: 400;
+}
