@@ -59,5 +59,12 @@ const signin = async (req, res, next) => {
     }
 };
 
-
-export { signin, signup }
+const signout = async(req, res, next) => {
+    try{
+      res.clearCookie('access-token').status(200).json('User has been signed out')
+    }
+    catch(err){
+      next(err)
+    }
+  }
+export { signin, signup, signout }

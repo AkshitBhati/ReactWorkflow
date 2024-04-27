@@ -3,7 +3,7 @@ import axios from 'axios';
 import csv from 'csv-parser'; 
 
 const executeWorkflow = async (req, res, next) => {
-    const { edges, csvFile } = req.body; 
+    const { edges, csvData } = req.body; 
 
     try {
         const workflowSequence = [];
@@ -18,7 +18,7 @@ const executeWorkflow = async (req, res, next) => {
 
         const actions = {
             Filter: async () => {
-                const parsedData = await parseCSV(csvFile); 
+                const parsedData = await parseCSV(csvData); 
                 const filteredRows = parsedData.map(row => {
                     const filteredRow = {};
                     for (const key in row) {
@@ -26,14 +26,14 @@ const executeWorkflow = async (req, res, next) => {
                     }
                     return filteredRow;
                 });
-                
+                console.log(filteredRows)
                 // Send filtered data as JSON response
                 res.status(200).json({ message: "Filtered data with lowercase column values"});
                 
                 jsonData = filteredRows;
             },
             Wait: async () => {
-                await wait(2000); 
+                await wait(60000); 
                 console.log("Wait1");
             },
             Convert: async () => {
@@ -63,7 +63,7 @@ const executeWorkflow = async (req, res, next) => {
             });
         };
 
-        const parseCSV = async (csvFile) => {
+        const parseCSV = async (csvData) => {
             return new Promise((resolve, reject) => {
                 const parsedData = [];
                 const stream = csv({ headers: true })
@@ -77,12 +77,13 @@ const executeWorkflow = async (req, res, next) => {
                         reject(error);
                     });
 
-                csvFile.pipe(stream); // Pipe the readable stream
+                stream.write(csvData);
+                stream.end();
             });
         };
 
-        const convertToJSON = async (csvFile) => {
-            return csvFile; // For simplicity, returning the same data
+        const convertToJSON = async (csvData) => {
+            return csvData; // For simplicity, returning the same data
             // You can implement your own logic to convert CSV to JSON format
         };
 

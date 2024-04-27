@@ -24,8 +24,8 @@ const UploadFile = ({ toggleModal, setUniqueIdParent, edges }) => {
   const runWorkflow = async () => {
     try {
       const formData = new FormData();
-      formData.set("edges", JSON.stringify(edges || {}));
-      formData.set("csvFile", csvData);
+      formData.append("csvFile", csvData);
+      formData.append("edges", JSON.stringify(edges || {}));
 
       const res = await fetch("/api/execution", {
         method: "POST",

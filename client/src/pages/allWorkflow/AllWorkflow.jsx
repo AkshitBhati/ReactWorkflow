@@ -19,7 +19,7 @@ const AllWorkflow = () => {
   const [edges, setEdges] = useState([])
 
     const getData = async() => {
-        fetch("/api/workflow/abc").then((res) => res.json()).then((data) => {
+        fetch(`/api/workflow/abc`).then((res) => res.json()).then((data) => {
           console.log(data)
           data.map((data) => {
             // console.log(data.nodes)

@@ -8,6 +8,7 @@ import Home from './pages/home/Home'
 import Navbar from './components/Navbar/Navbar'
 import {Toaster} from "react-hot-toast"
 import UploadFile from './components/uploadFile/UploadFile'
+import Profile from './pages/profile/Profile'
 
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
     <Route path='/signup' element={<Signup />} />
     <Route path='/workflow' element={<Workflow />} />
     <Route path='/execution' element={<UploadFile />} />
-
+    <Route path='/profile' element={<Profile />} />
     </Routes>
     </>
     
