@@ -5,7 +5,8 @@ const nodeSchema = new mongoose.Schema({
     data: Object,      
     position: Object,  
     height: Number,
-    width: Number
+    width: Number,
+    uniqueid:String
 });
 
 const edgeSchema = new mongoose.Schema({
@@ -19,7 +20,8 @@ const edgeSchema = new mongoose.Schema({
     targetHandle: {
         type: String,
         default: null
-    }
+    },
+    uniqueid:String
 });
 
 
@@ -27,7 +29,8 @@ const edgeSchema = new mongoose.Schema({
 const workflowSchema = mongoose.Schema({
    nodes:[nodeSchema],
    edges:[edgeSchema],
-   userid:String
+   userid:String,
+   
 
 }, {timestamps:true})
 

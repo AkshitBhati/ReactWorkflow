@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", userRoutes);
-app.use(workflowRoutes);
+app.use("/api",workflowRoutes);
 
 // Error handling middleware 
 app.use((err, req, res, next) => {
