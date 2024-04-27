@@ -11,9 +11,9 @@ const App = () => {
   return (
   //  <Signup />
   // <Signin />
-  // <Workflow />
+  <Workflow />
   // <UploadFile />
-  <AllWorkflow />
+  // <AllWorkflow />
   )
 }
 

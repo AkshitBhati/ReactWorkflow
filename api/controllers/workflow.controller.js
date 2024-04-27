@@ -31,29 +31,9 @@ const getWorkflowForUser = async (req, res, next) => {
     }
 };
 
-async function runWorkflowController(req, res) {
-    try {
-        const { nodes, edges } = req.body;
+const executeWorkflow = async (req, res, next) => {
+    
+    
+};
 
-        // Find the starting node (the one without any incoming edges)
-        const startingNode = nodes.find((node) => !edges.some((edge) => edge.target === node.id));
-
-        // Start executing the workflow from the starting node
-        await executeNode(startingNode, nodes, edges);
-
-        // Respond with success message and the workflow data
-        res.status(200).json({
-            message: "Workflow executed successfully",
-            workflow: {
-                nodes: nodes,
-                edges: edges,
-            },
-        });
-    } catch (error) {
-        // Handle errors
-        console.error("Error executing workflow:", error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-}
-
-export { createWorkflow, getWorkflowForUser, runWorkflowController };
+export { createWorkflow, getWorkflowForUser };

@@ -46,7 +46,7 @@ const WorkflowChart = () => {
         y: event.clientY,
       });
       const newNode = {
-        id: type + " " + getId(),
+        id: type + getId(),
         // type:type,
         position,
         data: { label: `${type}` },
