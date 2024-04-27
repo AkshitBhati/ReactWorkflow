@@ -1,0 +1,30 @@
+.home{
+    height: 95vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    font-family: Poppins;
+}
+
+.home img{
+    height: 200px;
+}
+
+.home p{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.home button{
+    padding: 10px 20px;
+    background-color: #1c2230;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #1c2230;
+    font-size: 14px;
+}

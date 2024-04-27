@@ -1,0 +1,35 @@
+.navbar-container{
+    
+    font-family: Poppins;
+}
+.navbar{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-branding{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+}
+.navbar-branding img{
+    height: 80px;
+    width: 90px;
+    
+}
+.navbar-branding h1{
+    font-weight: 500;
+}
+.navbar button{
+    padding: 8px 18px;
+    background-color: #1c2230;
+    color: #fff;
+    border: 1px solid #1c2230;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

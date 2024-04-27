@@ -1,13 +1,13 @@
 import errorHandler from "../utils/errorHandler.js";
 import axios from 'axios';
-import csv from 'csv-parser'; // Import csv-parser for parsing CSV data
+import csv from 'csv-parser'; 
 
 const executeWorkflow = async (req, res, next) => {
-    const { edges, csvData } = req.body; // Extract CSV data from req.body
+    const { edges, csvData } = req.body; 
 
     try {
         const workflowSequence = [];
-        let jsonData = []; // Variable to store JSON data
+        let jsonData = [];
 
         edges.forEach((edge, index) => {
             if (index === 0 || edge.source !== edges[index - 1]?.target) {
@@ -18,10 +18,10 @@ const executeWorkflow = async (req, res, next) => {
 
         const actions = {
             Filter: async () => {
-                // Process uploaded CSV data and convert column values to lowercase
-                const parsedData = await parseCSV(csvData); // Parse CSV data from req.body
+                
+                const parsedData = await parseCSV(csvData); 
 
-                // Convert column values to lowercase
+                
                 const filteredRows = parsedData.map(row => {
                     const filteredRow = {};
                     for (const key in row) {
@@ -30,27 +30,27 @@ const executeWorkflow = async (req, res, next) => {
                     return filteredRow;
                 });
 
-                console.log("Filtered data with lowercase column values:", filteredRows); // Log the filtered data
+                console.log("Filtered data with lowercase column values:", filteredRows); 
 
-                // Store filtered data
+                
                 jsonData = filteredRows;
             },
             Wait: async () => {
-                await wait(3000); // Wait for 3 seconds
+                await wait(60000); 
                 console.log("Wait1");
             },
             Convert: async () => {
-                // Convert CSV data to JSON format
+                
                 console.log("Converting CSV to JSON...");
-                console.log("CSV Data:", jsonData); // Log the CSV data before conversion
+                console.log("CSV Data:", jsonData); 
                 jsonData = await convertToJSON(jsonData);
-                console.log("JSON Data:", jsonData); // Log the JSON data after conversion
+                console.log("JSON Data:", jsonData); 
                 console.log("Conversion completed.");
             },
             Send: async () => {
-                // Send the JSON payload to a predefined URL
+                
                 try {
-                    const response = await axios.post('https://akshit/requestcatcher.com', jsonData); // Replace 'your-endpoint' with your actual endpoint
+                    const response = await axios.post('https://akshit/requestcatcher.com', jsonData); 
                     console.log('Response from server:', response.data);
                 } catch (error) {
                     console.error('Error sending POST request:', error);
@@ -58,7 +58,7 @@ const executeWorkflow = async (req, res, next) => {
             }
         };
 
-        // Function to introduce a wait (asynchronous delay)
+      
         const wait = async (milliseconds) => {
             return new Promise(resolve => {
                 setTimeout(() => {
@@ -67,7 +67,7 @@ const executeWorkflow = async (req, res, next) => {
             });
         };
 
-        // Function to parse CSV data
+      
         const parseCSV = async (csvData) => {
             return new Promise((resolve, reject) => {
                 const parsedData = [];
@@ -87,7 +87,7 @@ const executeWorkflow = async (req, res, next) => {
             });
         };
 
-        // Function to convert CSV data to JSON format
+      
         const convertToJSON = async (csvData) => {
             return csvData; // For simplicity, returning the same data
             // You can implement your own logic to convert CSV to JSON format
