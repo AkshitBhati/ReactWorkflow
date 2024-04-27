@@ -1,16 +1,10 @@
 import Workflow from "../modal/workflow.modal.js";
 import errorHandler from "../utils/errorHandler.js";
 
-// Define the executeNode function
-async function executeNode(node, nodes, edges) {
-    // Perform actions based on the node's label
-    // Implement your logic here...
-}
-
 const createWorkflow = async (req, res, next) => {
     try {
-        const { nodes, edges, userid } = req.body;
-        const newWorkflow = new Workflow({ nodes, edges, userid });
+        const { nodes, edges, userid, uniqueid } = req.body;
+        const newWorkflow = new Workflow({ nodes, edges, userid, uniqueid });
         await newWorkflow.save();
         res.status(201).json(newWorkflow);
     } catch (error) {

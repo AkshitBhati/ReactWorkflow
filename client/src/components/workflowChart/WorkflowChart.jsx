@@ -13,7 +13,7 @@ import './WorkflowChart.css';
 let id = 0;
 const getId = () => `${id++}`;
 
-const WorkflowChart = () => {
+const WorkflowChart = ({ setNodesParent, setEdgesParent }) => {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -23,7 +23,8 @@ const WorkflowChart = () => {
     (params) => setEdges((eds) => addEdge(params, eds)),
     [],
   );
-  console.log(edges)
+  setEdgesParent(edges)
+  
   const onDragOver = useCallback((event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
@@ -46,7 +47,7 @@ const WorkflowChart = () => {
         y: event.clientY,
       });
       const newNode = {
-        id: type + getId(),
+        id: type + " " + getId(),
         // type:type,
         position,
         data: { label: `${type}` },
@@ -56,7 +57,7 @@ const WorkflowChart = () => {
     },
     [reactFlowInstance],
   );
-  console.log(nodes)
+  setNodesParent(nodes)
   
   return (
     <div className="dndflow">

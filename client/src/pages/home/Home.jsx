@@ -21,7 +21,7 @@ const Home = () => {
     <div className='home'>
       <img src={asset} alt='logo' />
       <p>Create your first workflow!</p>
-      <button onClick={navigateHandler}>Create Board</button>
+      <button onClick={navigateHandler}>Create Workflow</button>
     </div>
   )
 }

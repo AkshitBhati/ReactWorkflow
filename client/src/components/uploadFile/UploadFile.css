@@ -1,0 +1,44 @@
+.upload{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.upload-screen{
+    width: 500px;
+    height: 300px;
+    border: 2px dashed #1c2230;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.select-id{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-around;
+    /* width: 50%; */
+}
+
+.run-workflow{
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+}
+
+.run-workflow button{
+    padding: 5px 15px;
+    background-color: #1c2230;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #1c2230;
+    cursor: pointer;
+
+}
+.error{
+    text-align: center;
+    color: red;
+}

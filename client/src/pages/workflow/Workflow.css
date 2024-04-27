@@ -5,12 +5,44 @@
     gap: 10px;
 }
 .workflow-node{
-    width: 30%;
+    width: 20%;
 
 }
 
 .workflow-chart{
     height: 85vh;
-    width: 65%;
+    width: 75%;
     border: 1px solid #000;
 }
+
+/* Modal container */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px); /* Apply background blur */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Modal content */
+  .modal-content {
+    position: relative; /* Ensure close button is positioned relative to the modal content */
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Close button */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
