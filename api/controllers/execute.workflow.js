@@ -31,7 +31,7 @@ const executeWorkflow = async (req, res, next) => {
                 jsonData = filteredRows;
             },
             Wait: async () => {
-                await wait(5000); 
+                await wait(60000); 
                 res.write("Waiting...\n");
                 res.flushHeaders();
             },
