@@ -34,7 +34,7 @@ const WorkflowNodes = ({ nodes, edges, toggleModal, uniqueId:uniqueid }) => {
   
       if (res.ok) {
         dispatch(workflowSaveSuccess(data));
-        // Perform any actions after successful save
+        toast.success("Workflow saved successfully")
       }
     } catch (err) {
       dispatch(workflowSaveFailure(err.message));
@@ -64,7 +64,7 @@ const WorkflowNodes = ({ nodes, edges, toggleModal, uniqueId:uniqueid }) => {
 
       <div
         className="dndnode"
-        onDragStart={(event) => onDragStart(event, "Convert Format")}
+        onDragStart={(event) => onDragStart(event, "Convert")}
         draggable
       >
         Convert Format
@@ -72,7 +72,7 @@ const WorkflowNodes = ({ nodes, edges, toggleModal, uniqueId:uniqueid }) => {
 
       <div
         className="dndnode"
-        onDragStart={(event) => onDragStart(event, "Send POST Request")}
+        onDragStart={(event) => onDragStart(event, "Send")}
         draggable
       >
         Send POST Request

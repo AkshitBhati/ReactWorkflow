@@ -7,22 +7,23 @@ import ReactFlow, {
   Controls,
   Background,
 } from 'reactflow';
+import { useParams } from "react-router-dom"
 import 'reactflow/dist/style.css';
 
 const AllWorkflow = () => {
-
+  const { id } = useParams()
+  
   const reactFlowWrapper = useRef(null);
-  // const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  // const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [nodes, setNodes] = useState([])
   const [edges, setEdges] = useState([])
 
     const getData = async() => {
-        fetch(`/api/workflow/abc`).then((res) => res.json()).then((data) => {
+        fetch(`/api/workflow/${currentUser._id}`).then((res) => res.json()).then((data) => {
           console.log(data)
           data.map((data) => {
-            // console.log(data.nodes)
+            console.log(data)
             setNodes(data.nodes)
             setEdges(data.edges)
           })

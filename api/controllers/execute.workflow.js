@@ -26,29 +26,25 @@ const executeWorkflow = async (req, res, next) => {
                     }
                     return filteredRow;
                 });
-                console.log(filteredRows)
-                // Send filtered data as JSON response
-                res.status(200).json({ message: "Filtered data with lowercase column values"});
-                
+                res.write("Filtered data with lowercase column values\n");
+                res.flushHeaders(); // Flush headers to send response immediately
                 jsonData = filteredRows;
             },
             Wait: async () => {
-                await wait(60000); 
-                console.log("Wait1");
+                await wait(5000); 
+                res.write("Waiting...\n");
+                res.flushHeaders();
             },
             Convert: async () => {
-                console.log("Converting CSV to JSON...");
-                console.log("CSV Data:", jsonData); 
+                res.write("Converting CSV to JSON...\n");
+                res.flushHeaders();
                 jsonData = await convertToJSON(jsonData);
-                console.log("JSON Data:", jsonData); 
-
-                // Send conversion completed message as JSON response
-                res.status(200).json({ message: "Conversion completed" });
             },
             Send: async () => {
                 try {
                     const response = await axios.post('https://akshit.requestcatcher.com', jsonData); 
-                    console.log('Response from server:', response.data);
+                    res.write('Response from server: ' + JSON.stringify(response.data) + '\n');
+                    res.flushHeaders();
                 } catch (error) {
                     console.error('Error sending POST request:', error);
                 }
@@ -84,7 +80,6 @@ const executeWorkflow = async (req, res, next) => {
 
         const convertToJSON = async (csvData) => {
             return csvData; // For simplicity, returning the same data
-            // You can implement your own logic to convert CSV to JSON format
         };
 
         const modifiedArray = workflowSequence.map(item => item.replace(/\s\d+$/, ''));
@@ -97,8 +92,7 @@ const executeWorkflow = async (req, res, next) => {
             }
         }
 
-        // Send a response back to the client (Postman)
-        res.status(200).json({ message: "Workflow executed successfully" });
+        res.end("Workflow executed successfully\n");
     } catch (err) {
         // If an error occurs, handle it and send an error response
         next(errorHandler(400, "Error executing workflow"));

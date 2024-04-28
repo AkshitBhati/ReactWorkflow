@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { v4 as uuidV4 } from "uuid";
 import "./UploadFile.css";
+import toast from "react-hot-toast";
 
 const UploadFile = ({ toggleModal, setUniqueIdParent, edges }) => {
   const [uniqueId, setUniqueId] = useState(uuidV4());
@@ -15,58 +16,46 @@ const UploadFile = ({ toggleModal, setUniqueIdParent, edges }) => {
     const fileInput = document.querySelector("#file-input");
     fileInput.click();
   };
-
+  
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
   };
-  
-  const runWorkflow = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("csvFile", csvData);
-      formData.append("edges", JSON.stringify(edges || {}));
 
+  const runWorkflow = async () => {
+    if(csvData === null){
+      toast.error("Please upload a file")
+    }
+    try {
       const res = await fetch("/api/execution", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: formData
+        body: JSON.stringify({ edges, csvData })
       });
 
       if (!res.ok) {
         throw new Error("Failed to execute workflow");
       }
 
+      const reader = res.body.getReader();
+      let partialResult = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        partialResult += new TextDecoder().decode(value);
+        // Update status with partialResult
+        setStatus(partialResult);
+      }
+
       // Reset error state on successful execution
       setError(null);
 
-      // Start polling for status updates
-      setStatus("Executing workflow...");
-      pollStatus();
+      // Final update after workflow completion
+      setStatus("Workflow executed successfully");
+
     } catch (err) {
       setError(err.message);
-    }
-  };
-
-  const pollStatus = async () => {
-    try {
-      // Simulate polling for status updates
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
-
-      // Simulate different status updates
-      setStatus("Filtering data...");
-      await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait for 3 seconds
-
-      setStatus("Converting data...");
-      await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait for 3 seconds
-
-      setStatus("Sending data...");
-      await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait for 3 seconds
-
-      setStatus("Workflow executed successfully."); // Final status update
-    } catch (err) {
-      console.error("Error polling for status:", err);
-      setStatus("Error: Unable to retrieve status updates.");
     }
   };
 
@@ -100,8 +89,8 @@ const UploadFile = ({ toggleModal, setUniqueIdParent, edges }) => {
           <button onClick={runWorkflow}>Run Workflow</button>
         </div>
 
-        {status && <div className="status">{status}</div>} {/* Display status update */}
-        {error && <div className="error">{error}</div>} {/* Display error message */}
+        {status && <div className="status">{status}</div>}
+        {error && <div className="error">{error}</div>} 
       </div>
     </div>
   );

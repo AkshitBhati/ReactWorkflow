@@ -3,6 +3,7 @@ import asset from "../../assets/note.svg";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import "./Home.css";
+import UserWorkflow from '../../components/userWorkflow/UserWorkflow';
 
 const Home = () => {
   const [err, setErr] = useState(null);
@@ -22,7 +23,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const res = await fetch(`/api/workflow/${currentUser._id}`);
-      const jsonData = await res.json(); // Parse response JSON
+      const jsonData = await res.json(); 
       setData(jsonData); 
     } catch (err) {
       setErr(err);
@@ -30,21 +31,23 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Fetch data when the component mounts
+    
     fetchData();
-  }, [currentUser]); // Run effect when currentUser changes
+  }, [currentUser]); 
 console.log(data)
   return (
-    <div className='home'>
+    <div className='user-workflow'>
+      {data ? data.map((work) => (
+        <>
+          <UserWorkflow id={work.uniqueid}/>
+          
+        </>
+      )) : (<div className='home'>
       <img src={asset} alt='logo' />
       <p>Create your first workflow!</p>
       <button onClick={navigateHandler}>Create Workflow</button>
-    {
-      data && (
-        <div className='box'>
-          </div>
-      )
-    }
+    
+    </div>)}
     </div>
   );
 };
