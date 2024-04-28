@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import "./Home.css";
 import UserWorkflow from '../../components/userWorkflow/UserWorkflow';
+import plus from "../../assets/plus.png"
 
 const Home = () => {
   const [err, setErr] = useState(null);
@@ -31,23 +32,32 @@ const Home = () => {
   };
 
   useEffect(() => {
-    
     fetchData();
   }, []); 
 
+
   return (
-    <div className='user-workflow'>
-      {data ? data.map((work, index) => (
-        <React.Fragment key={index}>
-          <UserWorkflow uniqueid={work.uniqueid}/>
-          
-        </React.Fragment>
-      )) : (<div className='home'>
-      <img src={asset} alt='logo' />
-      <p>Create your first workflow!</p>
-      <button onClick={navigateHandler}>Create Workflow</button>
+    <div className='home-container'>
+      
+      {data.length ? (
+        <div className='user-workflow'>
+          <div className='box' onClick={() => navigate("/workflow")}>
     
-    </div>)}
+    <img src={plus} alt="Random Image" />
+    <p>Create Workflow</p>
+  </div>
+          {data.map((work, index) => (
+            <UserWorkflow key={index} uniqueid={work.uniqueid}/>
+          ))}
+          
+        </div>
+      ) : (
+        <div className='home'>
+          <img src={asset} alt='logo' />
+          <p>Create your first workflow!</p>
+          <button onClick={navigateHandler}>Create Workflow</button>
+        </div>
+      )}
     </div>
   );
 };

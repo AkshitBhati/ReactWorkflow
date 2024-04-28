@@ -1,5 +1,5 @@
-.home{
-    height: 95vh;
+.home-container {
+    height: 90vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -7,18 +7,19 @@
     flex-direction: column;
     gap: 15px;
     font-family: Poppins;
-}
-
-.home img{
+  }
+  
+  .home img {
     height: 200px;
-}
-
-.home p{
+    
+  }
+  
+  .home p {
     font-size: 22px;
     font-weight: 600;
-}
-
-.home button{
+  }
+  
+  .home button {
     padding: 10px 20px;
     background-color: #1c2230;
     color: #fff;
@@ -27,22 +28,24 @@
     outline: none;
     border: 1px solid #1c2230;
     font-size: 14px;
-}
-.user-workflow{
+  }
+  
+  .user-workflow {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     width: 80%;
     margin: auto;
     gap: 15px;
     margin-top: 20px;
-}
-
-@media (max-width:700px){
-    .user-workflow{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
+  }
+  
+  @media (max-width: 700px) {
+    .user-workflow {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
     }
-}
+  }
+  
