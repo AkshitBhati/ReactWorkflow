@@ -33,15 +33,15 @@ const Home = () => {
   useEffect(() => {
     
     fetchData();
-  }, [currentUser]); 
-console.log(data)
+  }, []); 
+
   return (
     <div className='user-workflow'>
-      {data ? data.map((work) => (
-        <>
-          <UserWorkflow id={work.uniqueid}/>
+      {data ? data.map((work, index) => (
+        <React.Fragment key={index}>
+          <UserWorkflow uniqueid={work.uniqueid}/>
           
-        </>
+        </React.Fragment>
       )) : (<div className='home'>
       <img src={asset} alt='logo' />
       <p>Create your first workflow!</p>

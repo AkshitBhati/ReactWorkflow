@@ -14,7 +14,7 @@ import svg9 from "../../assets/9.svg";
 import svg10 from "../../assets/10.svg";
 import { useNavigate } from 'react-router-dom';
 
-const UserWorkflow = ({ id }) => {
+const UserWorkflow = ({ uniqueid }) => {
   const images = [svg1, svg2, svg3, svg4, svg5, svg6, svg7, svg8, svg9, svg10];
 
   const [selectedImage, setSelectedImage] = useState("");
@@ -26,14 +26,14 @@ const UserWorkflow = ({ id }) => {
 
   const navigate = useNavigate()
   const navigateToWorkflow = () => {
-    navigate(`/workflow/${id}`)
+    navigate(`/workflow/${uniqueid}`)
   }
 
   return (
     <div className='box' onClick={navigateToWorkflow}>
     
       <img src={selectedImage} alt="Random Image" />
-      <p>{id}</p>
+      <p>{uniqueid}</p>
     </div>
   );
 };

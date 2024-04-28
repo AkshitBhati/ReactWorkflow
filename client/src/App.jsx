@@ -23,7 +23,7 @@ const App = () => {
     <Route path='/workflow' element={<Workflow />} />
     <Route path='/execution' element={<UploadFile />} />
     <Route path='/profile' element={<Profile />} />
-    <Route path='/workflow/:id' element={<AllWorkflow />}/>
+    <Route path='/workflow/:uniqueid' element={<AllWorkflow />}/>
     </Routes>
     </>
     

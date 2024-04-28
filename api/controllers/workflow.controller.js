@@ -25,9 +25,18 @@ const getWorkflowForUser = async (req, res, next) => {
     }
 };
 
-const executeWorkflow = async (req, res, next) => {
+const getWorkflowByUniqueId = async (req, res, next) => {
+    const { uniqueid } = req.params;
     
-    
-};
+    try {
+        const userData = await Workflow.findOne({ uniqueid }); 
+        if (!userData) {
+            return next(errorHandler(404, "Data does not exist"));
+        }
+        res.status(200).json(userData);
+    } catch (err) {
+        next(errorHandler(500, "Could not get the workflow"));
+    }
+}
 
-export { createWorkflow, getWorkflowForUser };
+export { createWorkflow, getWorkflowForUser,getWorkflowByUniqueId };

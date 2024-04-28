@@ -11,19 +11,21 @@ import { useParams } from "react-router-dom"
 import 'reactflow/dist/style.css';
 
 const AllWorkflow = () => {
-  const { id } = useParams()
+  const { uniqueid } = useParams()
   
   const reactFlowWrapper = useRef(null);
 
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [nodes, setNodes] = useState([])
   const [edges, setEdges] = useState([])
+  const [data, setData] = useState([])
 
+  console.log(uniqueid);
+  
     const getData = async() => {
-        fetch(`/api/workflow/${currentUser._id}`).then((res) => res.json()).then((data) => {
-          console.log(data)
-          data.map((data) => {
-            console.log(data)
+        fetch(`/api/workflow/byuniqueid/${uniqueid}`).then((res) => res.json()).then((data) => {
+          console.log(data);
+          [data].map((data) => {
             setNodes(data.nodes)
             setEdges(data.edges)
           })
@@ -32,7 +34,9 @@ const AllWorkflow = () => {
 
     useEffect(() => {
         getData()
-    }, [])
+
+        
+    }, [data])
 
     const onConnect = useCallback(
       (params) => setEdges((eds) => addEdge(params, eds)),
@@ -79,8 +83,7 @@ const AllWorkflow = () => {
           <ReactFlow
             nodes={nodes}
             edges={edges}
-            // onNodesChange={onNodesChange}
-            // onEdgesChange={onEdgesChange}
+            
             onConnect={onConnect}
             onInit={setReactFlowInstance}
             onDrop={onDrop}
