@@ -43,7 +43,7 @@ This web application allows users to create and execute workflows for basic data
 - **Backend:** Node.js (Express.js recommended)
 - **Database:** A basic database solution for storing workflow definitions (MongoDB/PostgreSQL)
 - **Additional Information:**
-  - Create your own CSV file or use `tsx-data.csv`.
+  - Create your own CSV file .
   - Refer to Reactflow documentation and examples for implementation.
   - State management can be handled using Zustand or Redux.
 
